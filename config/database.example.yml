@@ -1,0 +1,17 @@
+# This is a sample for the database.yml file. You can edit your database.yml with your db credentials.
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: your_db_username
+  password: your_db_password
+  host: localhost
+  pool: 5
+
+
+development:
+  <<: *default
+  database: book_a_cab_development
+
+# test:
+#   <<: *default
+#   database: book_a_cab_test
