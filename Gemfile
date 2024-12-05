@@ -50,5 +50,7 @@ group :development do
   gem "web-console"
 end
 
-
 gem "devise", "~> 4.9"
+
+# Use geocoder to fetch coordinates and addresses from location names and vice versa
+gem "geocoder"
