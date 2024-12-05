@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_05_080725) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_05_144849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cabs", force: :cascade do |t|
+    t.string "model", null: false
+    t.string "vehicle_number", null: false
+    t.integer "category", default: 0, null: false
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_cabs_on_location_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
@@ -40,4 +50,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_080725) do
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "cabs", "locations"
 end

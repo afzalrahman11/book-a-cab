@@ -54,3 +54,6 @@ gem "devise", "~> 4.9"
 
 # Use geocoder to fetch coordinates and addresses from location names and vice versa
 gem "geocoder"
+
+# Use to populate fake db records
+gem "faker"
