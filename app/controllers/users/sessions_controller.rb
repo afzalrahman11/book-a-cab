@@ -27,10 +27,6 @@ class Users::SessionsController < Devise::SessionsController
 
   # The path used after sign in.
   def after_sign_in_path_for(resource)
-    if resource.owner?
-      users_path
-    else
-      user_path(resource)
-    end
+    root_path
   end
 end

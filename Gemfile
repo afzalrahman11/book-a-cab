@@ -57,3 +57,5 @@ gem "geocoder"
 
 # Use to populate fake db records
 gem "faker"
+
+gem "tailwindcss-rails", "~> 3.0"
