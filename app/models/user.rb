@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   enum role: {
     customer: 0,
-    owner: 1
+    admin: 1
   }
   validates :name, presence: true
   validates :phone, presence: true, uniqueness: true, format: { with: PHONE_REGEX, message: PHONE_REGEX_MESSAGE }
