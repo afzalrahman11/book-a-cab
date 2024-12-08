@@ -7,6 +7,7 @@ class RidesController < ApplicationController
     # Retrieve source and destination locations from the form
     source_address = params[:source_location]
     destination_address = params[:destination_location]
+    cab_category = params[:cab_category]
 
     # Find source and destination locations in the database
     source = Location.find_by(address: source_address)
@@ -24,7 +25,7 @@ class RidesController < ApplicationController
     end
 
     # Find an available cab
-    available_cab = Cab.find_by(is_available: true)
+    available_cab = Cab.where(is_available: true, category: cab_category).first
     if available_cab.nil?
       flash[:alert] = "No available cabs nearby. Please try again later."
       redirect_to root_path and return
@@ -63,7 +64,7 @@ class RidesController < ApplicationController
         location: @ride.destination_location
       )
 
-      flash[:notice] = "Ride marked as completed. Fare: #{@ride.total_fare}"
+      flash[:notice] = "Ride marked as completed."
       redirect_to ride_path(@ride) # Redirect to show ride details
     else
       flash[:alert] = "Failed to mark the ride as completed."
