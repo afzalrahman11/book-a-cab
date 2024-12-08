@@ -1,5 +1,8 @@
 # require 'faker'
 
+# # Create an admin user
+# User.create!(name: "Admin User", email: "admin@gmail.com", password: "admin123", phone: "9123456789", role: "admin")
+
 # # Create records in locations table with the use of geocoder gem to fetch address and coordinates
 # # from location name and viceversa.
 # locations = [ "High Court Junction", "M.G. Road", "Ernakulam Junction South",
