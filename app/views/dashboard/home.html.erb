@@ -1,6 +1,21 @@
 <% if user_signed_in? %>
   <h1 class="text-6xl font-medium leading-7 text-black">Book A Cab</h1>
-  <h2 class="mt-6 text-2xl font-light leading-2 text-black">Effortlessly book your cabs</h2>
+  <h2 class="mt-6 mb-10 text-2xl font-light leading-2 text-black">Effortlessly book your cabs</h2>
+  <%= form_with url: book_ride_path, turbo_method: :post, local: true do |form| %>
+  <div data-controller="autocomplete mt-10 py-10">
+    <%= label_tag :source_location, "From:" %>
+    <%= text_field_tag :source_location, "", id: "source_location", placeholder: "Enter source address", autocomplete: "off", class: "input-box", data: { autocomplete_target: "input" } %>
+    <div id="source_dropdown" class="autocomplete-dropdown" data-autocomplete-target="dropdown"></div>
+  </div>
+
+  <div data-controller="autocomplete">
+    <%= label_tag :destination_location, "To:" %>
+    <%= text_field_tag :destination_location, "", id: "destination_location", placeholder: "Enter destination address", autocomplete: "off", class: "input-box", data: { autocomplete_target: "input" } %>
+    <div id="destination_dropdown" class="autocomplete-dropdown" data-autocomplete-target="dropdown"></div>
+  </div>
+
+  <%= form.submit "Book Now", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+<% end %>
 <% else %>
   <h2 class = "text-2xl font-bold text-gray-500 mb-8" >Please Login or Sign up to continue.</h2>
   <p><button class = "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none rounded-lg text-sm font-medium px-5 py-2.5 me-2 mb-2 ml-2"> <%= link_to "Login", new_user_session_path %> </button>

@@ -2,12 +2,12 @@
 
 # # Create records in locations table with the use of geocoder gem to fetch address and coordinates
 # # from location name and viceversa.
-# locations = [ "Marine Drive", "Lulu Mall", "High Court Junction", "M.G. Road", "Ernakulam Junction South",
+# locations = [ "High Court Junction", "M.G. Road", "Ernakulam Junction South",
 #   "Cochin International Airport", "Vyttila Mobility Hub", "Fort Kochi Beach",
-#   "Kaloor Stadium", "Hill Palace Museum", "Pallimukku", "Ernakulam North Railway Station",
+#   "Kaloor Stadium", "Pallimukku", "Ernakulam North Railway Station",
 #   "Cherai Beach", "Panampilly Nagar", "Rajagiri College", "Vyttila Junction",
-#   "Elamkulam", "Amrita Hospital", "Seaport-Airport Road", "Thevara", "Aluva Market",
-#   "Infopark Phase 2", "Cusat Campus", "Angamaly", "Palarivattom Metro Station"
+#   "Elamkulam", "Seaport-Airport Road", "Thevara", "Aluva Market",
+#   "Kochi Infopark", "Cusat Campus", "Angamaly", "Palarivattom Metro Station"
 # ]
 
 # locations.each do |location|
