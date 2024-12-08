@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_05_144849) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_08_073716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_144849) do
     t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_available", default: true
     t.index ["location_id"], name: "index_cabs_on_location_id"
   end
 
@@ -33,6 +34,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_144849) do
     t.datetime "updated_at", null: false
     t.index ["latitude"], name: "index_locations_on_latitude"
     t.index ["longitude"], name: "index_locations_on_longitude"
+  end
+
+  create_table "rides", force: :cascade do |t|
+    t.bigint "source_location_id", null: false
+    t.bigint "destination_location_id", null: false
+    t.integer "request_status", default: 0, null: false
+    t.decimal "total_fare", precision: 10, scale: 2, null: false
+    t.bigint "user_id", null: false
+    t.bigint "cab_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cab_id"], name: "index_rides_on_cab_id"
+    t.index ["destination_location_id"], name: "index_rides_on_destination_location_id"
+    t.index ["source_location_id"], name: "index_rides_on_source_location_id"
+    t.index ["user_id"], name: "index_rides_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,4 +68,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_144849) do
   end
 
   add_foreign_key "cabs", "locations"
+  add_foreign_key "rides", "cabs"
+  add_foreign_key "rides", "locations", column: "destination_location_id"
+  add_foreign_key "rides", "locations", column: "source_location_id"
+  add_foreign_key "rides", "users"
 end

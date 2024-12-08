@@ -1,16 +1,21 @@
 Rails.application.routes.draw do
+  # Devise routes for user authentication
   devise_for :users, controllers: {
-        sessions: "users/sessions",
-        registrations: "users/registrations"
-      }
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
 
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
+  # Root route
   root "dashboard#home"
+
+  # Resources
   resources :users, only: [ :index, :show ]
   resources :cabs, only: [ :index ]
+  resources :rides, only: [ :create, :show ] do
+    patch :update_status, on: :member
+  end
+
+  # Custom Routes
+  get "locations/search", to: "locations#search"
+  post "rides/book", to: "rides#book", as: :book_ride
 end

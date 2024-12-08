@@ -1,0 +1,14 @@
+<h1>Ride Details</h1>
+<p><strong>Source:</strong> <%= @ride.source_location.address %></p>
+<p><strong>Destination:</strong> <%= @ride.destination_location.address %></p>
+<p><strong>Status:</strong> <%= @ride.request_status.humanize %></p>
+<p><strong>Total Fare:</strong> Rs. <%= @ride.total_fare %></p>
+<p><strong>Cab:</strong> <%= @ride.cab.model %> (<%= @ride.cab.vehicle_number %>)</p>
+
+<% if @ride.request_status != "completed" %>
+  <%= form_with url: update_status_ride_path(@ride), method: :patch, class: "mt-4" do %>
+    <%= submit_tag "Mark as Completed", class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+  <% end %>
+<% else %>
+  <p class="text-green-700 font-bold">This ride is already completed.</p>
+<% end %>
