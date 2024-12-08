@@ -5,5 +5,8 @@
   
   <div class="mt-4 flex justify-between">
     <%= link_to "Edit", edit_user_registration_path, class: "text-blue-500 hover:underline" %>
+    <% if current_user.admin? %>
+      <%= link_to "Delete User", user_path(user), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "text-red-500 hover:underline" %>
+    <% end %>
   </div>
 </div>

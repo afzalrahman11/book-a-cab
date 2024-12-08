@@ -7,6 +7,19 @@
     <span class = "font-bold">Vehicle No.: </span>
     <span class="font-medium"><%= cab.vehicle_number %></span></p>
   <p class="text-gray-600">
-    <span class = "font-bold">Current Location.: </span>
+    <span class = "font-bold">Current Location: </span>
     <span class="font-medium"><%= cab.location.name %></span></p>
+  <p class="text-gray-600">
+    <span class = "font-bold">Status: </span>
+    <% if cab.is_available? %>
+      <span class="font-medium text-green-600">available</span></p>
+    <% else %>
+      <span class="font-medium text-red-600">unavailable</span></p>
+    <% end %>
+  <p class="text-gray-600">
+    <span class = "font-bold">Total Trips: </span>
+    <span class="font-medium"><%= cab.rides.count %></span></p>
+  <p class="text-gray-600">
+    <span class = "font-bold">Total Earned: </span>
+    <span class="font-medium">₹ <%= cab.rides.sum(:total_fare) %></span></p>
 </div>
