@@ -1,5 +1,6 @@
 class Cab < ApplicationRecord
   belongs_to :location
+  has_many :rides, dependent: :destroy
 
   enum category: {
     regular: 0,

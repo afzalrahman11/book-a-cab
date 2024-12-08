@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [ :show ]
+  before_action :set_user, only: [ :show, :destroy ]
   def index
     @users = User.where(role: :customer)
   end
@@ -8,6 +8,14 @@ class UsersController < ApplicationController
   def show
   end
 
+  def destroy
+    if @user.destroy
+      flash[:notice] = "User deleted successfully."
+    else
+      flash[:alert] = "Failed to delete the user."
+    end
+    redirect_to users_path
+  end
   private
 
   def user_params

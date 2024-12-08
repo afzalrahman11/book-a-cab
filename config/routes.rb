@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   root "dashboard#home"
 
   # Resources
-  resources :users, only: [ :index, :show ]
+  resources :users, only: [ :index, :show, :destroy ]
   resources :cabs, only: [ :index ]
   resources :rides, only: [ :create, :show ] do
     patch :update_status, on: :member
+    get :daily_collection, on: :collection
   end
 
   # Custom Routes
