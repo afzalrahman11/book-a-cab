@@ -1,12 +1,12 @@
 class CabsController < ApplicationController
-  before_action :authenticate_owner
+  before_action :authenticate_admin
   def index
     @cabs = Cab.all
   end
 
   private
 
-  def authenticate_owner
-    authenticate_user! && current_user.owner?
+  def authenticate_admin
+    authenticate_user! && current_user.admin?
   end
 end

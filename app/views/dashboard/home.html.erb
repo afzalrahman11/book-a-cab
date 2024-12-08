@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <h1 class="text-6xl font-medium leading-7 text-black">Book A Cab</h1>
   <h2 class="mt-6 mb-10 text-2xl font-light leading-2 text-black">Effortlessly book your cabs</h2>
-  <% unless current_user.owner? %>
+  <% unless current_user.admin? %>
     <%= form_with url: book_ride_path, turbo_method: :post, local: true do |form| %>
     <div data-controller="autocomplete mt-10 py-10">
       <%= label_tag :source_location, "From:" %>
