@@ -10,7 +10,7 @@ This is a Ruby on Rails application for a customer to book a cab for rides and a
 - Admins can create, edit, update, and delete cabs.
 - Admins can view the status of all cabs, including their current location, total trips, and total fares earned.
 - Cab locations are updated after each ride.
-- Cabs are available for booking only after the customer marks the ride as Completed.
+- Cabs are available for booking only after the customer marks the ride as **Completed**.
 - The nearest cab is automatically assigned to the user based on their location.
 > [!NOTE]
 > Currently, the Cab Booking option is hidden for Admins.
@@ -24,8 +24,8 @@ This is a Ruby on Rails application for a customer to book a cab for rides and a
 > An admin user will be created with the following credentials:
   > - email: ```admin@gmail.com```
   > - password: ```admin123```
-- Start the application using bin/dev (this is used instead of rails s to load Tailwind CSS).
-- Enjoy your Book A Cab application!
+- Start the application using ```bin/dev``` (this is used instead of ```rails s``` to load **Tailwind CSS**).
+- Enjoy your **Book A Cab** application!
 
 ### Versions
 - Rails :- 7.2.2
