@@ -1,52 +1,41 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["input", "dropdown"];
+  static targets = ["source", "destination"]
 
-  connect() {
-    this.inputTarget.addEventListener("input", () => this.onInputChange());
-    document.addEventListener("click", (e) => {
-      if (!this.dropdownTarget.contains(e.target) && e.target !== this.inputTarget) {
-        this.dropdownTarget.style.display = "none";
-      }
-    });
-  }
-
-  onInputChange() {
-    const query = this.inputTarget.value;
+  search(event) {
+    const query = event.target.value;
+    const targetField = event.target.getAttribute("data-autocomplete-target");
 
     if (query.length < 2) {
-      this.dropdownTarget.innerHTML = ""; // Clear dropdown if query is too short
-      this.dropdownTarget.style.display = "none";
+      this.clearSuggestions(targetField);
       return;
     }
 
-    fetch(`/locations/search?q=${encodeURIComponent(query)}`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.dropdownTarget.innerHTML = "";
-
-        if (data.length === 0) {
-          this.dropdownTarget.style.display = "none";
-          return;
-        }
-
-        data.forEach((location) => {
-          const option = document.createElement("div");
-          option.className = "autocomplete-item";
-          option.textContent = `${location.name}, ${location.address}`;
-          option.dataset.value = location.address;
-
-          option.addEventListener("click", () => {
-            this.inputTarget.value = location.address;
-            this.dropdownTarget.innerHTML = "";
-            this.dropdownTarget.style.display = "none";
-          });
-
-          this.dropdownTarget.appendChild(option);
-        });
-
-        this.dropdownTarget.style.display = "block";
-      });
+    fetch(`/locations/search?q=${query}`)
+      .then(response => response.json())
+      .then(data => this.showSuggestions(data, targetField))
+      .catch(error => console.error("Error fetching suggestions:", error));
   }
+
+  showSuggestions(data, targetField) {
+    const resultsElement = document.getElementById(`${targetField}-suggestions`);
+    resultsElement.innerHTML = data
+      .map(location => 
+        `<div class="suggestion-item" data-value="${location.address}" 
+          onclick="selectAddress('${targetField}', '${location.address}')">
+          ${location.address}
+        </div>`)
+      .join("");
+  }
+
+  clearSuggestions(targetField) {
+    document.getElementById(`${targetField}-suggestions`).innerHTML = "";
+  }
+}
+
+// Add this function globally so it can be called from the HTML
+window.selectAddress = function (targetField, address) {
+  document.querySelector(`[data-autocomplete-target='${targetField}']`).value = address;
+  document.getElementById(`${targetField}-suggestions`).innerHTML = "";
 }
