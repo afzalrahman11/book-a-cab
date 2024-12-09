@@ -1,4 +1,4 @@
-<h1>Ride Details</h1>
+<h1 class = "text-2xl text-gray-600 font-medium" >Your Ride Details</h1>
 <p><strong>Source:</strong> <%= @ride.source_location.address %></p>
 <p><strong>Destination:</strong> <%= @ride.destination_location.address %></p>
 <p><strong>Status:</strong> <%= @ride.request_status.humanize %></p>
@@ -10,6 +10,6 @@
     <%= submit_tag "Mark as Completed", class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
   <% end %>
 <% else %>
-  <p class="text-green-700 font-bold">This ride is already completed.</p>
+  <p class="text-green-700 font-bold mb-4">This ride is already completed.</p>
   <%= button_to "Book Again", root_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
 <% end %>
