@@ -1,7 +1,7 @@
 # README
 
 ## Book A Cab
-This is a Ruby on Rails application for a customer to book a cab for rides and admin to manage the cabs.
+This is a Ruby on Rails application where customers can book cabs and admins can manage the cabs.
 
 ### Features
 - Users need to log in or sign up to book cabs.
