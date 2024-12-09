@@ -1,0 +1,43 @@
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+  <div class="flex flex-col items-center justify-center">
+    <%= link_to "Book A Cab", root_path, class: "text-3xl font-medium py-8" %>
+    <div class="border border-black rounded-md flex flex-col items-center py-4 px-6">
+      <h2 class="text-2xl font-medium mb-4">Edit Cab</h2>
+
+      <%= form_with model: @cab, local: true do |f| %>
+        <div class="flex flex-col my-4 min-w-96">
+          <%= f.label :model %>
+          <%= f.text_field :model, autofocus: true, value: @cab.model, autocomplete: "model", placeholder: "eg; Ford Mustang", class:'rounded-md border border-black mt-1 focus:ring-black' %>
+        </div>
+
+        <div class="flex flex-col my-4">
+          <%= f.label :vehicle_number, "Vehicle Number" %>
+          <%= f.text_field :vehicle_number, autofocus: true, value: @cab.vehicle_number, autocomplete: "vehicle_number", placeholder: "eg; KL07 A 5266", class:'rounded-md border border-black mt-1 focus:ring-black' %>
+        </div>
+
+        <!-- Cab Category Field -->
+        <div class="flex flex-col my-4">
+          <%= f.label :"Category:" %>
+          <%= f.select :category, ['regular', 'premium'], value: @cab.category, autocomplete: "category", class: 'rounded-md border border-black mt-1 focus:ring-black' %>
+        </div>
+
+        <!-- Location Address Field -->
+        <div class="relative">
+          <%= f.label :location, "Current Location:" %>
+          <%= f.search_field :current_location, 
+                value: @cab.location&.address,
+                placeholder: "Enter cab location", 
+                autofocus: true, 
+                class: "search-input rounded-md border border-black mt-1 focus:ring-black", 
+                data: { controller: "autocomplete", action: "input->autocomplete#search", autocomplete_target: "source" } %>
+          <div id="source-suggestions" class="autocomplete-results"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex flex-col items-center mt-12 mb-4">
+          <%= f.submit "Update Cab", class: 'min-w-max cursor-pointer bg-black text-white rounded-md py-2 px-6 hover:bg-gray-700' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
