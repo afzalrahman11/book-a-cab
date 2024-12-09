@@ -18,7 +18,7 @@ This is a Ruby on Rails application where customers can book cabs and admins can
 ### Steps for Initial Setup
 - Configure your ```config/database.yml```. Refer the ```config/database.example.yml``` file for guidance. The reference file is not required for the setup.
 - Run pending migrations using the ```rails db:migrate``` command.
-- Uncomment the code in ```db/seeds.rb``` and run ```rails db:seed``` to generate dummy records.
+- Run ```rails db:seed``` to generate dummy records.
 > [!NOTE]
 > This process will take 60–90 seconds, depending on your internet speed.
 > An admin user will be created with the following credentials:
