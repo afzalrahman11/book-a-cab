@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # Resources
   resources :users, only: [ :index, :show, :destroy ]
-  resources :cabs, only: [ :index ]
+  resources :cabs, only: [ :index, :new, :create, :edit, :update, :destroy ]
   resources :rides, only: [ :create, :show ] do
     patch :update_status, on: :member
     get :daily_collection, on: :collection

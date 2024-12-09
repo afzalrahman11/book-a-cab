@@ -1,0 +1,41 @@
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+  <div class="flex flex-col items-center justify-center">
+    <div class="border border-black rounded-md flex flex-col items-center py-4 px-6 mt-10">
+      <h2 class="text-2xl font-medium mb-4">Create a Cab</h2>
+
+    <%= form_with model: @cab, local: true do |f| %>
+      <div class="flex flex-col my-4 min-w-96">
+        <%= f.label :model %>
+        <%= f.text_field :model, autofocus: true, autocomplete: "model", placeholder: "eg; Ford Mustang", class:'rounded-md border border-black mt-1 focus:ring-black' %>
+      </div>
+
+      <div class="flex flex-col my-4">
+        <%= f.label :vehicle_number, "Vehicle Number" %>
+        <%= f.text_field :vehicle_number, autofocus: true, autocomplete: "vehicle_number", placeholder: "eg; KL07 A 5266", class:'rounded-md border border-black mt-1 focus:ring-black' %>
+      </div>
+
+      <!-- Cab Category Field -->
+      <div class="flex flex-col my-4">
+        <%= f.label :"Category:" %>
+        <%= f.select :category, ['regular', 'premium'], class: 'rounded-md border border-black mt-1 focus:ring-black' %>
+      </div>
+
+      <!-- Location Address Field -->
+      <div class="relative">
+        <%= f.label :location, "Current Location:" %>
+        <%= f.search_field :current_location, 
+              placeholder: "Enter cab location", 
+              autofocus: true, 
+              class: "search-input rounded-md border border-black mt-1 focus:ring-black", 
+              data: { controller: "autocomplete", action: "input->autocomplete#search", autocomplete_target: "source" } %>
+        <div id="source-suggestions" class="autocomplete-results"></div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex flex-col items-center mt-12">
+        <%= f.submit "Create Cab", class: 'min-w-max cursor-pointer bg-black text-white rounded-md py-2 px-6 hover:bg-gray-700' %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
