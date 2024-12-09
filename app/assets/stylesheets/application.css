@@ -13,21 +13,40 @@
  *= require_tree .
  *= require_self
  */
- .autocomplete-dropdown {
-  position: absolute;
-  background: white;
+/* Dropdown container styling */
+.autocomplete-results {
   border: 1px solid #ccc;
-  z-index: 1000;
-  max-height: 200px;
+  background: #fff;
+  max-height: 150px;
   overflow-y: auto;
-  width: 100%;
+  position: absolute;
+  z-index: 1000;
+  width: 100%; /* Match the input width */
+  margin-top: -1px; /* Remove extra border overlap */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.autocomplete-item {
+/* Dropdown item styling */
+.suggestion-item {
   padding: 10px;
   cursor: pointer;
 }
 
-.autocomplete-item:hover {
+.suggestion-item:hover {
   background-color: #f0f0f0;
+}
+
+/* Input styling */
+.search-input {
+  border: 1px solid #ccc; /* Single border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px 10px; /* Comfortable padding */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding and border in width */
+  outline: none; /* Remove blue outline on focus */
+}
+
+.search-input:focus {
+  border-color: #007bff; /* Border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow */
 }

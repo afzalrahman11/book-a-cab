@@ -9,15 +9,18 @@ class RidesController < ApplicationController
 
     # Ensure source or destination is present and different
     if source_location.nil? || destination_location.nil?
-      handle_redirect("Invalid source or destination. Please select from the dropdown.")
+      flash[:alert] = "Invalid source or destination. Please select from the dropdown."
+      redirect_to root_path and return
     elsif source_location == destination_location
-      handle_redirect("Source and destination cannot be the same.")
+      flash[:alert] = "Source and destination cannot be the same."
+      redirect_to root_path and return
     end
 
     # Find an available cab
     nearest_cab = find_nearest_cab(source_location, params[:cab_category])
     if nearest_cab.nil?
-      handle_redirect("No available cabs nearby. Please try again later.")
+      flash[:alert] = "No available cabs nearby. Please try again later."
+      redirect_to root_path and return
     else
       # Create the ride
       ride = create_ride(source_location, destination_location, nearest_cab)
@@ -29,7 +32,8 @@ class RidesController < ApplicationController
         flash[:notice] = "Your ride has been booked successfully!"
         redirect_to ride_path(ride)
       else
-        handle_redirect("Failed to book the ride. Please try again.")
+        flash[:alert] = "Failed to book the ride. Please try again."
+        redirect_to root_path and return
       end
     end
   end
@@ -59,15 +63,10 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:id])
   end
 
-  def handle_redirect(message, path = root_path)
-    flash[:alert] = message
-    redirect_to path and return
-  end
-
   def find_location(source_address, destination_address)
     source_location = Location.find_by(address: source_address)
     destination_location = Location.find_by(address: destination_address)
-    if source_location.nil? || destination_location.nil? || source_location == destination_location
+    if source_location.nil? || destination_location.nil?
       return nil, nil
     end
 

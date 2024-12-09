@@ -1,11 +1,9 @@
-<!--<p class="flex place-content-center font-regular leading-8 bg-green-400"><%= notice %></p>
-<p class="flex place-content-center font-regular leading-8 bg-red-400"><%= alert %></p>-->
 <% if notice.present? %>
   <p class="flex place-content-center font-regular leading-8 bg-green-400" id="noticeMessage">
     <span><%= notice %></span>
     <button onclick="closeAlert('noticeMessage')" class="ml-4 text-white">Click here to close X</button>
   </p>
-<% elsif notice.present? %>
+<% elsif alert.present? %>
   <p class="flex place-content-center font-regular leading-8 bg-red-400" id="alertMessage">
     <span><%= alert %></span>
     <button class="ml-4 text-white" onclick="closeAlert('alertMessage')">Click here to close X</button>
