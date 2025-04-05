@@ -3,7 +3,7 @@ class RidesController < ApplicationController
   before_action :find_ride, only: [ :show, :update_status ]
 
   def index
-    @rides = current_user.rides
+    @rides = current_user.admin? ? Ride.order(:request_status) : current_user.rides.order(:request_status)
   end
 
   def show; end
