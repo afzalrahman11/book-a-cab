@@ -1,0 +1,16 @@
+<div class="block mt-8 max-w-none p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-200 dark:border-gray-100">
+  <div class="font-normal text-gray-900 dark:text-black">
+    <p><strong>Source:</strong> <%= ride.source_location.address.split(",").first %></p>
+    <p><strong>Destination:</strong> <%= ride.destination_location.address.split(",").first %></p>
+    <p><strong>Status:</strong> 
+      <span class = "text-green-800 font-medium"><%= ride.booked? ? "Active" : "Completed" %></span></p>
+    <p><strong>Total Fare:</strong> Rs. <%= ride.total_fare %></p>
+    <p><strong>Cab:</strong> <%= ride.cab.model %> (<%= ride.cab.vehicle_number %>)</p>
+  </div>
+
+  <% if ride.request_status != "completed" %>
+    <%= form_with url: update_status_ride_path(ride), method: :patch, class: "mt-4" do %>
+      <%= submit_tag "Mark as Completed", class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+    <% end %>
+  <% end %>
+</div>

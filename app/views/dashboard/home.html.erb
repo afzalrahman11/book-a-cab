@@ -2,7 +2,7 @@
   <h1 class="text-6xl font-medium leading-7 text-black">Book A Cab</h1>
   <h2 class="mt-6 mb-10 text-2xl font-light leading-2 text-black">Effortlessly book your cabs</h2>
   <%= image_tag 'book_a_cab.svg', class:'ml-80 w-40 w-full md:w-1/2 p-4' %>
-  <% if current_user.customer? && current_user.rides.last.completed? %>
+  <% if current_user.customer? && (current_user.rides.empty? || current_user.rides.last&.completed?) %>
     <%= form_with url: book_ride_path, turbo_method: :post, local: true do |f| %>
       <!-- Source Address Field -->
       <div class="relative">

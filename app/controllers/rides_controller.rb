@@ -1,6 +1,11 @@
 class RidesController < ApplicationController
   before_action :authenticate_user!, only: [ :show ]
   before_action :find_ride, only: [ :show, :update_status ]
+
+  def index
+    @rides = current_user.rides
+  end
+
   def show; end
 
   def book
